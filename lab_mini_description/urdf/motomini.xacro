@@ -1,0 +1,210 @@
+<?xml version="1.0" ?>
+<robot name="motoman_motomini" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- <xacro:include filename='$(find lab_mini_description)/urdf/lab_mini_gazebo.xacro' /> -->
+    <!-- color -->
+    <xacro:property name="color_yaskawa_blue" value="${33/255} ${38/255} ${191/255} 1.0"/>
+
+    <xacro:property name="color_yaskawa_white" value="0.99 0.99 0.99 1"/>
+  
+    <!-- not an official colour, but used in some old xacro:macros -->
+    <xacro:property name="color_yaskawa_yellow" value="0 1 1 1"/>
+  
+    <!-- not an official colour, but used in some old xacro:macros -->
+    <xacro:property name="color_yaskawa_silver" value="0.8 0.8 0.8 1"/>
+
+    <xacro:macro name="material_yaskawa_blue">
+        <material name="">
+          <color rgba="${color_yaskawa_blue}"/>
+        </material>
+    </xacro:macro>
+    
+    <xacro:macro name="material_yaskawa_white">
+        <material name="">
+          <color rgba="${color_yaskawa_white}"/>
+        </material>
+    </xacro:macro>
+    
+      <!-- not an official colour, but used in some old xacro:macros -->
+    <xacro:macro name="material_yaskawa_yellow">
+        <material name="">
+          <color rgba="${color_yaskawa_yellow}"/>
+        </material>
+    </xacro:macro>
+    
+      <!-- not an official colour, but used in some old xacro:macros -->
+    <xacro:macro name="material_yaskawa_silver">
+        <material name="">
+          <color rgba="${color_yaskawa_silver}"/>
+        </material>
+    </xacro:macro>
+
+
+    <!-- Useful Macros -->
+    <xacro:macro name="default_inertial" params="mass">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="${mass}" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                     iyy="1.0" iyz="0.0"
+                     izz="1.0" />
+        </inertial>
+    </xacro:macro>
+    <!-- link -->
+    <link name="base_link">
+        <xacro:default_inertial mass="1.0"/>
+        <visual>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/visual/base_link.stl"/>
+            </geometry>
+            <xacro:material_yaskawa_blue/>
+        </visual>
+        <collision>
+            <geometry>
+              <mesh filename="package://motoman_motomini_support/meshes/motomini/collision/base_link.stl"/>
+            </geometry>
+          </collision>
+    </link>
+
+    <link name="link_1_s">
+        <xacro:default_inertial mass="1.0"/>
+        <visual>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/visual/link_1_s.stl"/>
+            </geometry>
+            <xacro:material_yaskawa_blue/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://motoman_motomini_support/meshes/motomini/collision/link_1_s.stl"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="link_2_l">
+        <xacro:default_inertial mass="1.0"/>
+        <visual>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/visual/link_2_l.stl"/>
+            </geometry>
+            <xacro:material_yaskawa_blue/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://motoman_motomini_support/meshes/motomini/collision/link_2_l.stl"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="link_3_u">
+        <xacro:default_inertial mass="1.0"/>
+        <visual>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/visual/link_3_u.stl"/>
+            </geometry>
+            <xacro:material_yaskawa_blue/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/collision/link_3_u.stl"/>
+            </geometry>
+        </collision>
+    </link>
+    <link name="link_4_r">
+        <xacro:default_inertial mass="1.0"/>
+        <visual>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/visual/link_4_r.stl"/>
+            </geometry>
+            <xacro:material_yaskawa_blue/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/collision/link_4_r.stl"/>
+            </geometry>
+        </collision>
+    </link>
+    <link name="link_5_b">
+        <xacro:default_inertial mass="1.0"/>
+        <visual>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/visual/link_5_b.stl"/>
+            </geometry>
+            <xacro:material_yaskawa_blue/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/collision/link_5_b.stl"/>
+            </geometry>
+        </collision>
+    </link>
+    <link name="link_6_t">
+        <xacro:default_inertial mass="1.0"/>
+        <visual>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/visual/link_6_t.stl"/>
+            </geometry>
+            <xacro:material_yaskawa_blue/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://lab_mini_description/meshes/motomini/collision/link_6_t.stl"/>
+            </geometry>
+        </collision>
+    </link>
+    <link name="tool0"/>
+    <!-- joint -->
+    <joint name="joint_1_s" type="revolute">
+        <parent link="base_link"/>
+        <child link="link_1_s"/>
+        <origin xyz="0 0 0.103" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+        <limit lower="-2.9670" upper="2.9670" effort="0.12" velocity="5.4977"/>
+    </joint>
+    <joint name="joint_2_l" type="revolute">
+        <parent link="link_1_s"/>
+        <child link="link_2_l"/>
+        <origin xyz="0.020 0 0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+        <limit lower="-1.4835" upper="1.5707" effort="0.12" velocity="5.4977"/>
+    </joint>
+    <joint name="joint_3_u" type="revolute">
+        <parent link="link_2_l"/>
+        <child link="link_3_u"/>
+        <origin xyz="0 0 0.165" rpy="0 0 0" />
+        <axis xyz="0 -1 0" />
+        <limit lower="-0.8726" upper="1.5707" effort="0.12" velocity="7.3304"/>
+    </joint>
+    <joint name="joint_4_r" type="revolute">
+        <parent link="link_3_u"/>
+        <child link="link_4_r"/>
+        <origin xyz="0.165 0 0" rpy="0 0 0" />
+        <axis xyz="-1 0 0" />
+        <limit lower="-2.4434" upper="2.4434" effort="0.07" velocity="10.4719"/>
+    </joint>
+    <joint name="joint_5_b" type="revolute">
+        <parent link="link_4_r"/>
+        <child link="link_5_b"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <axis xyz="0 -1 0" />
+        <limit lower="-0.5235" upper="3.6651" effort="0.07" velocity="10.4719"/>
+    </joint>
+    <joint name="joint_6_t" type="revolute">
+        <parent link="link_5_b"/>
+        <child link="link_6_t"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+        <limit lower="-6.2831" upper="6.2831" effort="0.07" velocity="10.4719"/>
+    </joint>
+    <joint name="joint_6_t-tool0" type="fixed">
+        <origin xyz="0 0 -0.040 " rpy="${pi} 0 0"/>
+        <parent link="link_6_t"/>
+        <child link="tool0"/>
+    </joint>
+    <link name="base" />
+    <joint name="base_link-base" type="fixed">
+        <origin xyz="0 0 0.103" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="base"/>
+  </joint>
+</robot>
